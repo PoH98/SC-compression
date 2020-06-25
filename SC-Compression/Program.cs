@@ -16,8 +16,7 @@ namespace SC_Compression
                 try
                 {
                     Console.WriteLine(file);
-                    var buffer = File.ReadAllBytes(file);
-                    File.WriteAllBytes(file.Replace(".csv", "Decrypted.csv"), scCompression.Decompress(buffer));
+                    File.WriteAllBytes(file, scCompression.Decompress(file));
                 }
                 catch(Exception ex)
                 {
@@ -25,6 +24,38 @@ namespace SC_Compression
                 }
 
             }
+            Console.WriteLine("Start Compress back");
+            Console.ReadLine();
+            foreach (var file in Directory.GetFiles(Environment.CurrentDirectory, "*.csv"))
+            {
+                try
+                {
+                    Console.WriteLine(file);
+                    File.WriteAllBytes(file, scCompression.Compress(file));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+
+            }
+            Console.WriteLine("Start Decompress back again");
+            Console.ReadLine();
+            foreach (var file in Directory.GetFiles(Environment.CurrentDirectory, "*.csv"))
+            {
+                try
+                {
+                    Console.WriteLine(file);
+                    File.WriteAllBytes(file, scCompression.Decompress(file));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+
+            }
+            Console.WriteLine("press enter to exit");
+            Console.ReadLine();
         }
     }
 
